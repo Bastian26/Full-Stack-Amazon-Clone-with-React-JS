@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "./firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const Login = () => {
+  const navigate = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,6 +16,12 @@ const Login = () => {
     // Hält die Seite vom Refresh ab, sollte die Regel sein
     e.preventDefault();
     // some fancy firebase login shittttt ....
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .auth((auth) => {
+        navigate.push("/");
+      })
+      .catch((error) => alert.message);
   };
 
   const register = (e) => {
@@ -20,7 +30,11 @@ const Login = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((auth) => {
         // it successfully created a new user with email and password
-        console.log(auth);
+        // console.log(auth);
+        // if history is not empty
+        if (auth) {
+          navigate.push("/");
+        }
       })
       .catch((error) => alert(error.message));
     // do some fancy firebase register shittttt ....
