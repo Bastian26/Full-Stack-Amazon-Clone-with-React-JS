@@ -1,5 +1,6 @@
 export const initialState = {
   basket: [],
+  user: null,
 };
 
 // Selector
@@ -10,12 +11,12 @@ export const getBasketTotal = (basket) => {
 const reducer = (state, action) => {
   console.log(action);
   switch (action.type) {
-    case "ADD_TO_BASKET":
+    case 'ADD_TO_BASKET':
       return {
         ...state,
         basket: [...state.basket, action.item],
       };
-    case "REMOVE_FROM_BASKET":
+    case 'REMOVE_FROM_BASKET':
       // gibt den array index mit id xy zurück
       const index = state.basket.findIndex(
         (basketItem) => basketItem.id === action.id
@@ -37,6 +38,11 @@ const reducer = (state, action) => {
         basket: newBasket,
       };
 
+    case 'SET_USER':
+      return {
+        ...state,
+        user: action.user,
+      };
     default:
       return state;
   }
