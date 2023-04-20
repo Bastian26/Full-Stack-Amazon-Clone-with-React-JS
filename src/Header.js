@@ -34,7 +34,7 @@ function Header() {
         {/* if user is signed out then link to login */}
         <Link to={!user && '/login'} className='header__link'>
           <div onClick={handleAuthentication} className='header__option'>
-            <span className='header__optionLineOne'>Guest</span>
+            <span className='header__optionLineOne'>Hello Guest</span>
 
             <span className='header__optionLineTwo'>
               {/* If user is signed in -> output Sign In*/}
