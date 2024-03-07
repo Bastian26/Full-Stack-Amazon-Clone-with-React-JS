@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import './Login.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { auth } from './firebase';
+import React, { useState } from "react";
+import "./Login.css";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from 'firebase/auth';
+} from "firebase/auth";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const signIn = (e) => {
     // Hält die Seite vom Refresh ab, sollte die Regel sein
@@ -18,9 +18,9 @@ const Login = () => {
     // some fancy firebase login shittttt ....
     signInWithEmailAndPassword(auth, email, password)
       .then((auth) => {
-        console.log('test');
+        console.log("test");
         // if it was successful
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => alert.message);
   };
@@ -34,7 +34,7 @@ const Login = () => {
         // console.log(auth);
         // if history is not empty
         if (auth) {
-          navigate('/');
+          navigate("/");
         }
       })
       .catch((error) => alert(error.message));
@@ -42,35 +42,35 @@ const Login = () => {
   };
 
   return (
-    <div className='login'>
-      <Link to='/'>
+    <div className="login">
+      <Link to="/">
         <img
-          className='login__logo'
-          src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png'
-          alt='Amazon Logo'
+          className="login__logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png"
+          alt="Amazon Logo"
         />
       </Link>
 
-      <div className='login__container'>
+      <div className="login__container">
         <h1>Sign-in</h1>
         <form>
           <h5>E-Mail</h5>
           <input
-            type='text'
+            type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <h5>Password</h5>
           <input
-            type='password'
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
           <button
-            type='submit'
+            type="submit"
             onClick={signIn}
-            className='login__signInButton'
+            className="login__signInButton"
           >
             Sign In
           </button>
@@ -82,8 +82,8 @@ const Login = () => {
           </p>
 
           <button
-            className='login__registerButton'
-            type='submit'
+            className="login__registerButton"
+            type="submit"
             onClick={register}
           >
             Create your Amazon Account

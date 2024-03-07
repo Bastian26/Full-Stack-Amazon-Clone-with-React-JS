@@ -1,12 +1,12 @@
-import './App.css';
-import Header from './Header';
-import Home from './Home';
-import Checkout from './Checkout';
-import Login from './Login';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { auth } from './firebase';
-import { useStateValue } from './StateProvider';
+import "./App.css";
+import Header from "./components/header/Header";
+import Home from "./components/home/Home";
+import Checkout from "./components/checkout/Checkout";
+import Login from "./components/login/Login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { auth } from "./firebase";
+import { useStateValue } from "./StateProvider";
 
 function App() {
   const [{}, dispatch] = useStateValue();
@@ -14,14 +14,14 @@ function App() {
   useEffect(() => {
     // will only runs once when the app component loads
     auth.onAuthStateChanged((authUser) => {
-      console.log('THE USER IS >>>', authUser);
+      console.log("THE USER IS >>>", authUser);
 
       if (authUser) {
         // the usr just logged in / the user was logged in
-        dispatch({ type: 'SET_USER', user: authUser });
+        dispatch({ type: "SET_USER", user: authUser });
       } else {
         // the user ist logged out
-        dispatch({ type: 'SET_USER', user: null });
+        dispatch({ type: "SET_USER", user: null });
       }
     });
   }, []);
@@ -29,10 +29,10 @@ function App() {
   return (
     // BEM Naming Convention
     <Router>
-      <div className='App'>
+      <div className="App">
         <Routes>
           <Route
-            path='/login'
+            path="/login"
             element={
               <>
                 <Login />
@@ -40,7 +40,7 @@ function App() {
             }
           />
           <Route
-            path='/checkout'
+            path="/checkout"
             element={
               <>
                 <Header />
@@ -50,7 +50,7 @@ function App() {
           />
           {/* Default route */}
           <Route
-            path='/'
+            path="/"
             element={
               <>
                 <Header />
